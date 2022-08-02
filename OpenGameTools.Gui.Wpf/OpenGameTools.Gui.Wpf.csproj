@@ -8,6 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dirkster.AvalonDock" Version="4.70.2" />
+    <PackageReference Include="Dirkster.AvalonDock.Themes.VS2013" Version="4.70.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="ReactiveUI" Version="18.3.1" />
     <PackageReference Include="ReactiveUI.WPF" Version="18.3.1" />
   </ItemGroup>
