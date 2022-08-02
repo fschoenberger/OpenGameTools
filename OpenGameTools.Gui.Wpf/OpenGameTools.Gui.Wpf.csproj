@@ -16,4 +16,8 @@
     <PackageReference Include="ReactiveUI.WPF" Version="18.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OpenGameTools.Gui\OpenGameTools.Gui.csproj" />
+  </ItemGroup>
+
 </Project>
