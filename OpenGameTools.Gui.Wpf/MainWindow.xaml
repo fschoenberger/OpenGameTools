@@ -1,12 +1,14 @@
-﻿<Window x:Class="OpenGameTools.Gui.Wpf.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OpenGameTools.Gui.Wpf"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+﻿<reactiveUi:ReactiveWindow x:TypeArguments="viewModel:IMainWindowViewModel" x:Class="OpenGameTools.Gui.Wpf.MainWindow"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                           xmlns:local="clr-namespace:OpenGameTools.Gui.Wpf"
+                           xmlns:reactiveUi="http://reactiveui.net"
+                           xmlns:viewModel="clr-namespace:OpenGameTools.Gui.ViewModel;assembly=OpenGameTools.Gui"
+                           mc:Ignorable="d"
+                           Title="MainWindow" Height="450" Width="800">
     <Grid>
 
     </Grid>
-</Window>
+</reactiveUi:ReactiveWindow>
