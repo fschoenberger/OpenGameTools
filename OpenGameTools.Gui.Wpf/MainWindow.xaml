@@ -8,8 +8,15 @@
                            xmlns:viewModel="clr-namespace:OpenGameTools.Gui.ViewModel;assembly=OpenGameTools.Gui"
                            xmlns:selectors="clr-namespace:OpenGameTools.Gui.Wpf.Selectors"
                            xmlns:localVm="clr-namespace:OpenGameTools.Gui.Wpf.ViewModel"
+                           xmlns:properties="clr-namespace:OpenGameTools.Gui.Wpf.Properties"
                            mc:Ignorable="d"
-                           Title="MainWindow" Height="450" Width="800"
+                           Title="MainWindow"
+                           Height="{Binding Source={x:Static properties:Settings.Default}, Path=WindowHeight, Delay=500, Mode=TwoWay}" 
+                           Width="{Binding Source={x:Static properties:Settings.Default}, Path=WindowWidth, Delay=500, Mode=TwoWay}" 
+                           Top="{Binding Source={x:Static properties:Settings.Default}, Path=WindowTop, Delay=500, Mode=TwoWay}" 
+                           Left="{Binding Source={x:Static properties:Settings.Default}, Path=WindowLeft, Delay=500, Mode=TwoWay}" 
+                           WindowState="{Binding Source={x:Static properties:Settings.Default}, Path=WindowState, Delay=500, Mode=TwoWay}" 
+
                            d:DataContext="{d:DesignInstance Type=viewModel:IMainWindowViewModel}">
     <DockPanel>
         <DockingManager x:Name="DockingManager" d:DataContext="{d:DesignInstance Type=viewModel:IDockViewModel}">
@@ -37,14 +44,14 @@
             <DockingManager.LayoutItemContainerStyleSelector>
                 <selectors:DockingElementStyleSelector>
                     <selectors:DockingElementStyleSelector.DocumentStyle>
-                        <Style d:DataContext="{d:DesignInstance Type=viewModel:IDocumentViewModel}" TargetType="{x:Type LayoutItem}">
+                        <Style d:DataContext="{d:DesignInstance Type=LayoutItem}" TargetType="{x:Type LayoutItem}">
                             <Setter Property="Title" Value="{Binding Model.FriendlyName, Mode=OneWay}" />
                             <Setter Property="ToolTip" Value="{Binding Model.Path, Mode=OneWay}" />
                             <Setter Property="ContentId" Value="{Binding Model.Id, Mode=OneWay}" />
                         </Style>
                     </selectors:DockingElementStyleSelector.DocumentStyle>
                     <selectors:DockingElementStyleSelector.ToolPaneStyle>
-                        <Style  d:DataContext="{d:DesignInstance Type=viewModel:IToolViewModel}" TargetType="{x:Type LayoutAnchorableItem}">
+                        <Style  d:DataContext="{d:DesignInstance Type=LayoutAnchorableItem}" TargetType="{x:Type LayoutAnchorableItem}">
                             <Setter Property="Title" Value="{Binding Model.FriendlyName, Mode=OneWay}" />
                             <Setter Property="ContentId" Value="{Binding Model.Id, Mode=OneWay}" />
                         </Style>

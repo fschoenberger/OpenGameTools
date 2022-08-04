@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OpenGameTools.Gui.ViewModel;
+using OpenGameTools.Gui.Wpf.Properties;
 using OpenGameTools.Gui.Wpf.ViewModel;
 using ReactiveUI;
 
@@ -26,6 +27,8 @@ namespace OpenGameTools.Gui.Wpf {
         private readonly IDockViewModel _layoutViewModel;
 
         public MainWindow(IMainWindowViewModel viewModel, IDockViewModel layoutViewModel) {
+            Settings.Default.PropertyChanged += (sender, args) => Settings.Default.Save();
+
             ViewModel = viewModel;
             InitializeComponent();
 

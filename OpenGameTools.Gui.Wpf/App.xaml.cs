@@ -30,7 +30,8 @@ namespace OpenGameTools.Gui.Wpf {
         private ILogger<App> _log;
 
         public App() {
-            _host = new HostBuilder()
+            _host = //new HostBuilder()
+                Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) => {
                     //Register splat and ReactiveUI
                     services.UseMicrosoftDependencyResolver();
