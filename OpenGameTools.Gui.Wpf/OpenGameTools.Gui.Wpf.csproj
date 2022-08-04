@@ -13,10 +13,16 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="ReactiveUI" Version="18.3.1" />
     <PackageReference Include="ReactiveUI.WPF" Version="18.3.1" />
+    <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="14.4.1" />
+    <PackageReference Include="Splat.Microsoft.Extensions.Logging" Version="14.4.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\OpenGameTools.Gui\OpenGameTools.Gui.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="View\" />
   </ItemGroup>
 
 </Project>

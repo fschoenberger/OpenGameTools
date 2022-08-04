@@ -9,6 +9,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Configuration;
+using OpenGameTools.Gui.ViewModel;
+using OpenGameTools.Gui.Wpf.ViewModel;
+using ReactiveUI;
+using Splat;
+using Splat.Microsoft.Extensions.DependencyInjection;
+using Splat.Microsoft.Extensions.Logging;
 
 namespace OpenGameTools.Gui.Wpf {
     /// <summary>
@@ -21,28 +27,40 @@ namespace OpenGameTools.Gui.Wpf {
         public App() {
             _host = new HostBuilder()
                 .ConfigureServices((context, services) => {
+                    //Register splat and ReactiveUI
+                    services.UseMicrosoftDependencyResolver();
+                    var resolver = Locator.CurrentMutable;
+                    resolver.InitializeSplat();
+                    resolver.InitializeReactiveUI();
+
                     // Add services here
                     // TODO: Dynamic plugin discovery
-                    services.AddSingleton<MainWindow>();
+                    services
+                        .AddSingleton<IMainWindowViewModel, MainWindowViewModel>()
+                        .AddSingleton<IViewFor<IMainWindowViewModel>, MainWindow>();
                 })
                 .ConfigureLogging(logging => {
                     // TODO: Make this read from settings
-                    logging.AddConsole();
+                    //logging.AddConsole();
                     logging.AddDebug();
+                    logging.AddSplat();
                 })
                 .Build();
+
+            //Re-register splat
+            _host.Services.UseMicrosoftDependencyResolver();
         }
 
         private async void App_OnStartup(object sender, StartupEventArgs e) {
             await _host.StartAsync();
 
             _log = _host.Services.GetService<ILogger<App>>()!;
-            var mainWindow = _host.Services.GetService<MainWindow>();
 
-            if (mainWindow == null) {
+            if (_host.Services.GetService<IViewFor<IMainWindowViewModel>>() is not Window mainWindow) {
                 _log.LogCritical("MainWindow not resolvable via DI. Shutting down.");
                 Shutdown();
-            } else {
+            }
+            else {
                 mainWindow?.Show();
                 _log.LogInformation("All services initialized.");
             }
