@@ -22,7 +22,7 @@ namespace OpenGameTools.Gui.Wpf {
     /// </summary>
     public partial class App : Application {
         private readonly IHost _host;
-        private ILogger<App>? _log;
+        private ILogger<App> _log;
 
         public App() {
             _host = new HostBuilder()
@@ -47,6 +47,9 @@ namespace OpenGameTools.Gui.Wpf {
                 })
                 .Build();
 
+            //Set logger here
+            _log = _host.Services.GetRequiredService<ILogger<App>>()!;
+
             //Re-register splat
             _host.Services.UseMicrosoftDependencyResolver();
         }
@@ -54,14 +57,12 @@ namespace OpenGameTools.Gui.Wpf {
         private async void App_OnStartup(object sender, StartupEventArgs e) {
             await _host.StartAsync();
 
-            _log = _host.Services.GetService<ILogger<App>>()!;
-
-            if (_host.Services.GetService<IViewFor<IMainWindowViewModel>>() is not Window mainWindow) {
+            if (_host.Services.GetRequiredService<IViewFor<IMainWindowViewModel>>() is not Window mainWindow) {
                 _log.LogCritical("MainWindow not resolvable via DI. Shutting down.");
                 Shutdown();
             }
             else {
-                mainWindow?.Show();
+                mainWindow.Show();
                 _log.LogInformation("All services initialized.");
             }
         }
