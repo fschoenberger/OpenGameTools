@@ -44,14 +44,14 @@
             <DockingManager.LayoutItemContainerStyleSelector>
                 <selectors:DockingElementStyleSelector>
                     <selectors:DockingElementStyleSelector.DocumentStyle>
-                        <Style d:DataContext="{d:DesignInstance Type=LayoutItem}" TargetType="{x:Type LayoutItem}">
+                        <Style TargetType="{x:Type LayoutItem}">
                             <Setter Property="Title" Value="{Binding Model.FriendlyName, Mode=OneWay}" />
                             <Setter Property="ToolTip" Value="{Binding Model.Path, Mode=OneWay}" />
                             <Setter Property="ContentId" Value="{Binding Model.Id, Mode=OneWay}" />
                         </Style>
                     </selectors:DockingElementStyleSelector.DocumentStyle>
                     <selectors:DockingElementStyleSelector.ToolPaneStyle>
-                        <Style  d:DataContext="{d:DesignInstance Type=LayoutAnchorableItem}" TargetType="{x:Type LayoutAnchorableItem}">
+                        <Style TargetType="{x:Type LayoutAnchorableItem}">
                             <Setter Property="Title" Value="{Binding Model.FriendlyName, Mode=OneWay}" />
                             <Setter Property="ContentId" Value="{Binding Model.Id, Mode=OneWay}" />
                         </Style>
