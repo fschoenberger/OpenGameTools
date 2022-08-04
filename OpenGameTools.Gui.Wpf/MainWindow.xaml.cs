@@ -21,7 +21,8 @@ namespace OpenGameTools.Gui.Wpf {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : ReactiveWindow<IMainWindowViewModel>, IComponentConnector {
-        public MainWindow() {
+        public MainWindow(IMainWindowViewModel vm) {
+            ViewModel = vm;
             InitializeComponent();
         }
     }
