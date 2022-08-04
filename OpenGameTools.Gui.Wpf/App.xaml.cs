@@ -10,7 +10,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Configuration;
 using OpenGameTools.Gui.ViewModel;
+using OpenGameTools.Gui.ViewModel.ProjectExplorer;
+using OpenGameTools.Gui.Wpf.View.DummyDocument;
+using OpenGameTools.Gui.Wpf.View.ProjectExplorer;
 using OpenGameTools.Gui.Wpf.ViewModel;
+using OpenGameTools.Gui.Wpf.ViewModel.DummyDocument;
+using OpenGameTools.Gui.Wpf.ViewModel.ProjectExplorer;
 using ReactiveUI;
 using Splat;
 using Splat.Microsoft.Extensions.DependencyInjection;
@@ -37,7 +42,10 @@ namespace OpenGameTools.Gui.Wpf {
                     // TODO: Dynamic plugin discovery
                     services
                         .AddSingleton<IMainWindowViewModel, MainWindowViewModel>()
-                        .AddSingleton<IViewFor<IMainWindowViewModel>, MainWindow>();
+                        .AddSingleton<IViewFor<IMainWindowViewModel>, MainWindow>()
+                        .AddTransient<IDockViewModel, DockViewModel>()
+                        .AddTransient<IViewFor<ProjectExplorerViewModel>, ProjectExplorer>()
+                        .AddTransient<IViewFor<DummyDocumentViewModel>, DummyDocument>();
                 })
                 .ConfigureLogging(logging => {
                     // TODO: Make this read from settings

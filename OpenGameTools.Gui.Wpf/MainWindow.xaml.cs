@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OpenGameTools.Gui.ViewModel;
+using OpenGameTools.Gui.Wpf.ViewModel;
 using ReactiveUI;
 
 namespace OpenGameTools.Gui.Wpf {
@@ -21,9 +23,32 @@ namespace OpenGameTools.Gui.Wpf {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : ReactiveWindow<IMainWindowViewModel>, IComponentConnector {
-        public MainWindow(IMainWindowViewModel vm) {
-            ViewModel = vm;
+        private readonly IDockViewModel _layoutViewModel;
+
+        public MainWindow(IMainWindowViewModel viewModel, IDockViewModel layoutViewModel) {
+            ViewModel = viewModel;
             InitializeComponent();
+
+            _layoutViewModel = layoutViewModel;
+
+            this.WhenActivated(d => {
+                d(HandleLayout());
+                //d(this.WhenAnyValue(x => x.DockingManager).BindTo(_layoutViewModel, vm => vm.DockingManager));
+                d(this.OneWayBind(ViewModel,
+                    vm => vm.DocumentViewModels,
+                    view => view.DockingManager.DocumentsSource)
+                );
+                d(this.OneWayBind(ViewModel,
+                    vm => vm.VisibleToolViewModels,
+                    view => view.DockingManager.AnchorablesSource)
+                );
+            });
+        }
+
+        private IDisposable HandleLayout() {
+            _layoutViewModel.LoadLayoutCommand.Execute(null);
+
+            return Disposable.Create(() => _layoutViewModel.SaveLayoutCommand.Execute(null));
         }
     }
 }
