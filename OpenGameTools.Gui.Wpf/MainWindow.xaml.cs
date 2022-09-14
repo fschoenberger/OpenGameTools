@@ -14,19 +14,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 using OpenGameTools.Gui.ViewModel;
 using OpenGameTools.Gui.Wpf.Properties;
 using OpenGameTools.Gui.Wpf.ViewModel;
 using ReactiveUI;
 
-namespace OpenGameTools.Gui.Wpf {
+namespace OpenGameTools.Gui.Wpf
+{
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : ReactiveWindow<IMainWindowViewModel>, IComponentConnector {
+    public partial class MainWindow : MetroWindow /*ReactiveWindow<IMainWindowViewModel>*/, IViewFor<IMainWindowViewModel>, IComponentConnector
+    {
         private readonly IDockViewModel _layoutViewModel;
 
-        public MainWindow(IMainWindowViewModel viewModel, IDockViewModel layoutViewModel) {
+        public MainWindow(IMainWindowViewModel viewModel, IDockViewModel layoutViewModel)
+        {
             Settings.Default.PropertyChanged += (sender, args) => Settings.Default.Save();
 
             ViewModel = viewModel;
@@ -34,7 +38,8 @@ namespace OpenGameTools.Gui.Wpf {
 
             _layoutViewModel = layoutViewModel;
 
-            this.WhenActivated(d => {
+            this.WhenActivated(d =>
+            {
                 d(HandleLayout());
                 //d(this.WhenAnyValue(x => x.DockingManager).BindTo(_layoutViewModel, vm => vm.DockingManager));
                 d(this.OneWayBind(ViewModel,
@@ -48,7 +53,31 @@ namespace OpenGameTools.Gui.Wpf {
             });
         }
 
-        private IDisposable HandleLayout() {
+        /// <summary>
+        /// The view model dependency property.
+        /// </summary>
+        public static readonly DependencyProperty ViewModelProperty =
+            DependencyProperty.Register(
+                                        "ViewModel",
+                                        typeof(IMainWindowViewModel),
+                                        typeof(ReactiveWindow<IMainWindowViewModel>),
+                                        new PropertyMetadata(null));
+
+        public IMainWindowViewModel? BindingRoot => ViewModel;
+
+        public IMainWindowViewModel? ViewModel {
+            get => (IMainWindowViewModel)GetValue(ViewModelProperty);
+            set => SetValue(ViewModelProperty, value);
+        }
+
+        /// <inheritdoc/>
+        object? IViewFor.ViewModel {
+            get => ViewModel;
+            set => ViewModel = (IMainWindowViewModel?)value;
+        }
+
+        private IDisposable HandleLayout()
+        {
             _layoutViewModel.LoadLayoutCommand.Execute(null);
 
             return Disposable.Create(() => _layoutViewModel.SaveLayoutCommand.Execute(null));
