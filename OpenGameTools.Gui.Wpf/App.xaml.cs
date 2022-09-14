@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Configuration;
 using OpenGameTools.Gui.ViewModel;
 using OpenGameTools.Gui.ViewModel.ProjectExplorer;
-using OpenGameTools.Gui.ViewModel.QuestDocument;
+using OpenGameTools.Gui.ViewModel.Quest;
 using OpenGameTools.Gui.Wpf.View.DummyDocument;
 using OpenGameTools.Gui.Wpf.View.ProjectExplorer;
 using OpenGameTools.Gui.Wpf.View.QuestDocument;

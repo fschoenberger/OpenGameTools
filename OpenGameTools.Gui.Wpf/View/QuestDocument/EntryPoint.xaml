@@ -1,0 +1,16 @@
+﻿<reactiveUi:ReactiveUserControl x:TypeArguments="vm:EntryPointViewModel"
+                                x:Class="OpenGameTools.Gui.Wpf.View.QuestDocument.EntryPoint"
+                                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                                xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                                xmlns:local="clr-namespace:OpenGameTools.Gui.Wpf.View.QuestDocument"
+                                xmlns:reactiveUi="http://reactiveui.net"
+                                xmlns:vm="clr-namespace:OpenGameTools.Gui.ViewModel.Quest;assembly=OpenGameTools.Gui"
+                                mc:Ignorable="d" 
+                                d:DesignHeight="30" d:DesignWidth="100">
+    <StackPanel>
+        <Ellipse Width="15" Height="15" Fill="Black"></Ellipse>
+        <TextBlock Name="StateName" TextAlignment="Center">Entry Point</TextBlock>
+    </StackPanel>
+</reactiveUi:ReactiveUserControl>
