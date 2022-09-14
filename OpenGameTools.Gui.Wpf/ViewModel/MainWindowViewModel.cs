@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using OpenGameTools.Gui.ViewModel;
 using OpenGameTools.Gui.ViewModel.ProjectExplorer;
+using OpenGameTools.Gui.ViewModel.QuestDocument;
 using OpenGameTools.Gui.Wpf.ViewModel.ProjectExplorer;
 using OpenGameTools.Gui.Wpf.ViewModel.DummyDocument;
 using ReactiveUI;
@@ -17,6 +18,7 @@ namespace OpenGameTools.Gui.Wpf.ViewModel {
             new ProjectExplorerViewModel()
         };
         private readonly IReadOnlyList<IDocumentViewModel> _documentViewModels = new List<IDocumentViewModel>() {
+            new QuestDocumentViewModel(),
             new DummyDocumentViewModel()
         };
 

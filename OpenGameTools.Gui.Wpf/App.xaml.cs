@@ -11,8 +11,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Configuration;
 using OpenGameTools.Gui.ViewModel;
 using OpenGameTools.Gui.ViewModel.ProjectExplorer;
+using OpenGameTools.Gui.ViewModel.QuestDocument;
 using OpenGameTools.Gui.Wpf.View.DummyDocument;
 using OpenGameTools.Gui.Wpf.View.ProjectExplorer;
+using OpenGameTools.Gui.Wpf.View.QuestDocument;
 using OpenGameTools.Gui.Wpf.ViewModel;
 using OpenGameTools.Gui.Wpf.ViewModel.DummyDocument;
 using OpenGameTools.Gui.Wpf.ViewModel.ProjectExplorer;
@@ -46,7 +48,8 @@ namespace OpenGameTools.Gui.Wpf {
                         .AddSingleton<IViewFor<IMainWindowViewModel>, MainWindow>()
                         .AddTransient<IDockViewModel, DockViewModel>()
                         .AddTransient<IViewFor<ProjectExplorerViewModel>, ProjectExplorer>()
-                        .AddTransient<IViewFor<DummyDocumentViewModel>, DummyDocument>();
+                        .AddTransient<IViewFor<DummyDocumentViewModel>, DummyDocument>()
+                        .AddTransient<IViewFor<QuestDocumentViewModel>, QuestDocument>();
                 })
                 .ConfigureLogging(logging => {
                     // TODO: Make this read from settings
