@@ -26,7 +26,7 @@
             </DrawingBrush>
             <c:PointConverter x:Key="PointConverter" />
         </Grid.Resources>
-        <nodify:NodifyEditor x:Name="Editor" Background="{StaticResource GridDrawingBrush}">
+        <nodify:NodifyEditor x:Name="Editor" Background="{StaticResource GridDrawingBrush}" ConnectionCompletedCommand="{Binding CreateTransition}">
             <nodify:NodifyEditor.ItemTemplateSelector>
                 <selectors:StateMachineTemplateSelector>
                     <selectors:StateMachineTemplateSelector.State>
@@ -55,6 +55,13 @@
                     <Setter Property="Location" Value="{Binding Location, Converter={StaticResource PointConverter}}" />
                 </Style>
             </nodify:NodifyEditor.ItemContainerStyle>
+            <nodify:NodifyEditor.ConnectionTemplate>
+                <DataTemplate DataType="{x:Type vm:TransitionViewModel}">
+                    <nodify:DirectionalConnection Source="{Binding Source.Anchor, Converter={StaticResource PointConverter}}" 
+                                                  Target="{Binding Target.Anchor, Converter={StaticResource PointConverter}}" 
+                                                  Tag="{Binding}" />
+                </DataTemplate>
+            </nodify:NodifyEditor.ConnectionTemplate>
         </nodify:NodifyEditor>
     </Grid>
 </reactiveUi:ReactiveUserControl>
